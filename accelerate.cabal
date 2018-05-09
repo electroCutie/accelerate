@@ -338,6 +338,9 @@ Library
         Data.Array.Accelerate.Trafo
         Data.Array.Accelerate.Type
 
+        -- For using the classes to handle variable arity functions
+        Data.Array.Accelerate.Trafo.Sharing
+
         -- For testing
         Data.Array.Accelerate.Test.NoFib
         Data.Array.Accelerate.Test.Similar
