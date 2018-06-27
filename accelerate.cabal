@@ -1,7 +1,7 @@
 Name:                   accelerate
-Version:                1.2.0.0
+Version:                1.3.0.0
 Cabal-version:          >= 1.18
-Tested-with:            GHC >= 7.8
+Tested-with:            GHC >= 7.10
 Build-type:             Custom
 
 Synopsis:               An embedded language for accelerated array processing
@@ -128,8 +128,6 @@ Stability:              Experimental
 Extra-source-files:
     README.md
     CHANGELOG.md
-    cbits/flags.inc
-    cbits/monitoring.inc
 
 Extra-doc-files:
     images/*.png
@@ -281,7 +279,7 @@ Library
         , exceptions                    >= 0.6
         , filepath                      >= 1.0
         , ghc-prim
-        , half                          >= 0.2
+        , half                          >= 0.3
         , hashable                      >= 1.1
         , hashtables                    >= 1.2.3
         , hedgehog                      >= 0.5
@@ -336,6 +334,7 @@ Library
         Data.Array.Accelerate.Product
         Data.Array.Accelerate.Smart
         Data.Array.Accelerate.Trafo
+        Data.Array.Accelerate.Trafo.Sharing
         Data.Array.Accelerate.Type
 
         -- For using the classes to handle variable arity functions
@@ -380,7 +379,6 @@ Library
         Data.Array.Accelerate.Trafo.Base
         Data.Array.Accelerate.Trafo.Fusion
         Data.Array.Accelerate.Trafo.Rewrite
-        Data.Array.Accelerate.Trafo.Sharing
         Data.Array.Accelerate.Trafo.Shrink
         Data.Array.Accelerate.Trafo.Simplify
         Data.Array.Accelerate.Trafo.Substitution
@@ -447,6 +445,10 @@ Library
   hs-source-dirs:
         src
 
+  c-sources:
+        cbits/atomic.c
+        cbits/clock.c
+
   if flag(debug) || flag(ekg)
     ghc-options:
         -optc-DACCELERATE_DEBUG
@@ -457,13 +459,10 @@ Library
     -- Weird handling of C files because Cabal is not recompile C files on
     -- changes to cc-options: <https://github.com/haskell/cabal/issues/4937>
     c-sources:
-        cbits/atomic.c
-        cbits/clock.c
         cbits/flags_debug.c
         cbits/monitoring_debug.c
   else
     c-sources:
-        cbits/atomic.c
         cbits/flags.c
         cbits/monitoring.c
 
@@ -587,7 +586,7 @@ source-repository head
 
 source-repository this
   Type:                 git
-  Tag:                  v1.2.0.0
+  Tag:                  v1.3.0.0
   Location:             git://github.com/AccelerateHS/accelerate.git
 
 -- vim: nospell

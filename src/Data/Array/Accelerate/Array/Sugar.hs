@@ -99,7 +99,7 @@ data Z = Z
 --  used to construct both values and types.
 --
 infixl 3 :.
-data tail :. head = tail :. head
+data tail :. head = !tail :. !head
   deriving (Typeable, Eq)
 
 -- We don't we use a derived Show instance for (:.) because this will insert
@@ -1242,6 +1242,8 @@ fromFunction :: (Shape sh, Elt e) => sh -> (sh -> e) -> Array sh e
 fromFunction sh f = unsafePerformIO $! fromFunctionM sh (return . f)
 
 -- | Create an array using a monadic function applied at each index.
+--
+-- @since 1.2.0.0
 --
 {-# INLINEABLE fromFunctionM #-}
 fromFunctionM :: (Shape sh, Elt e) => sh -> (sh -> IO e) -> IO (Array sh e)
