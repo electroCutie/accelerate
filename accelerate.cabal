@@ -334,7 +334,6 @@ Library
         Data.Array.Accelerate.Product
         Data.Array.Accelerate.Smart
         Data.Array.Accelerate.Trafo
-        Data.Array.Accelerate.Trafo.Sharing
         Data.Array.Accelerate.Type
 
         -- For using the classes to handle variable arity functions
